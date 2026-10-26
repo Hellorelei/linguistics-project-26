@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+.DS_Store
+program/.idea/inspectionProfiles/profiles_settings.xml
+program/.idea/misc.xml
+program/.idea/modules.xml
+program/.idea/program.iml
+program/.idea/vcs.xml
