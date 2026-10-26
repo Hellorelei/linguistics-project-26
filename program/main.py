@@ -68,7 +68,7 @@ class Tools:
 
 
     @staticmethod
-    def api_request_corpas_ie(word):
+    def api_request_corpas_ie(word) -> dict:
 
         r = requests.get(
             f"https://www.corpas.ie/noskeproxy.json?command=view&corpname=cng&viewmode=sen&q[]=q[lc=\"{word}\"]"
@@ -78,6 +78,20 @@ class Tools:
         print(r.text)
         print("\n" * 4)
         print(json.dumps(r.json(), indent=4))
+
+        r_json = json.loads(r.text)
+        relevant_data = r_json["Lines"][0]["Kwic"][1]
+        print(relevant_data)
+        split_data = relevant_data["str"].split("/")
+        print(split_data)
+        word_data = {
+            "word": word,
+            "lemma": split_data[2],
+            "tag": split_data[1],
+        }
+        print(word_data)
+
+        return word_data
 # https://api.sketchengine.eu/bonito/run.cgi/view?corpname=preloaded/bnc2&json={"corpname":"preloaded/bnc2", "q":["q[lemma=\"test\"]", "r250"]}
 # https://api.sketchengine.eu/bonito/run.cgi/wordlist?corpname=preloaded/bnc2&wlattr=word&keywords=1&usesubcorp=wri-to-be-spoken&wlsort=frq&wlmaxitems=2&ref_corpname=preloaded/bnc&format=json
 # https://www.corpas.ie/en/cng/?q=bhean%20ba%20léanmhar
@@ -158,7 +172,7 @@ class ProgramLoop:
 
 
 def main():
-    Tools.api_request_corpas_ie("bhean")
+    Tools.api_request_corpas_ie("chéile")
     return
     while True:
         ProgramLoop.welcome()
