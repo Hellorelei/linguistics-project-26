@@ -1,0 +1,41 @@
+[<w tag="Npms" base="cúrfa">Cúrfa</w>]
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="R" base="anois">Anois</w> <w tag="Sp" base="ar">ar</w> <w tag="Nv" base="teacht">theacht</w> <w tag="Td-sg" base="an">an</w> <w tag="Ncmsg" base="samhradh">tsamhraidh</w>
+
+[<w tag="Ncmsc" base="véarsa">Véarsa</w> 1]
+<w tag="Pp3mss" base="sé">Sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> <w tag="Q" base="a">a</w> <w tag="Ncfsc" base="bean">bhean</w> <w tag="Wsri" base="is">ba</w> <w tag="Aq-fsc" base="léanmhar">léanmhar</w>!
+<w tag="Ns" base="B">B</w>'<w tag="Pp3ms" base="é">é</w> <w tag="Dp1-p" base="ár">ár</w> <w tag="Ncfsc" base="creach">gcreach</w> <w tag="Pp2-s" base="tú">tú</w> <w tag="Nv" base="bheith">bheith</w> <w tag="Sp" base="i">I</w> <w tag="Ncmsc" base="géibheann">ngéibheann</w>
+<w tag="Sp" base="do">Do</w> <w tag="Ncfsc" base="dúiche">dhúiche</w> <w tag="Aqp" base="breá">bhreá</w> <w tag="Sp" base="i">i</w> <w tag="Ncfsc" base="seilbh">seilbh</w> <w tag="Ncmsc" base="meirleach">meirleach</w>
+'<w tag="M" base="s">S</w> <w tag="Pp2-s" base="tú">tú</w> <w tag="Av" base="díolta">díolta</w> <w tag="Sp" base="le">leis</w> <w tag="Td-p" base="an">na</w> <w tag="Ncmpd" base="Gall">Ghallaibh</w>
+
+[<w tag="Ncmsc" base="curfá">Curfá</w>]
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="R" base="anois">Anois</w> <w tag="Sp" base="ar">ar</w> <w tag="Nv" base="teacht">theacht</w> <w tag="Td-sg" base="an">an</w> <w tag="Ncmsg" base="samhradh">tsamhraidh</w>
+
+[<w tag="Ncmsc" base="véarsa">Véarsa</w> 2]
+<w tag="Npfsc" base="Gráinne">Gráinne</w> <w tag="Aq-fsc" base="maol">Mhaol</w> <w tag="Sp" base="ag">ag</w> <w tag="Nv" base="teacht">teacht</w> <w tag="Spc" base="thar">thar</w> <w tag="Ncfsg" base="sáil">sáile</w>
+<w tag="Ncmpc" base="óglach">Óglaigh</w> <w tag="Av" base="armtha">armtha</w> <w tag="Pr3fs" base="le">léi</w> <w tag="Cs" base="mar">mar</w> <w tag="Ncmsc" base="garda">gharda</w>
+<w tag="Npmp" base="Gael">Gaeil</w> <w tag="Pp3-p" base="iad">iad</w> <w tag="Px" base="féin">féin</w> '<w tag="M" base="s">s</w> <w tag="Wp-in" base="is">ni</w> <w tag="Npmsc" base="Frainc">Frainc</w> <w tag="Cc" base="ná">ná</w> <w tag="Ncmsg" base="Spáinneach">Spáinnigh</w>
+'<w tag="M" base="s">S</w> <w tag="Vmif" base="cuir">cuirfidh</w> <w tag="Pp3-ps" base="siad">siad</w> <w tag="Ncfsc" base="ruaig">ruaig</w> <w tag="Sp" base="ar">ar</w> <w tag="Ncmpd" base="Gall">Ghallaibh</w>
+
+[<w tag="Ncmsc" base="curfá">Curfá</w>]
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="R" base="anois">Anois</w> <w tag="Sp" base="ar">ar</w> <w tag="Nv" base="teacht">theacht</w> <w tag="Td-sg" base="an">an</w> <w tag="Ncmsg" base="samhradh">tsamhraidh</w>
+
+[<w tag="Ncmsc" base="véarsa">Véarsa</w> 3]
+<w tag="Q" base="a">A</w> <w tag="Ns-s" base="buí">bhuí</w> <w tag="Sp" base="le">le</w> <w tag="Ncmsg" base="rí">Rí</w> <w tag="Td-p" base="an">na</w> <w tag="Ncmsc" base="feart">bhfeart</w> <w tag="U" base="go">go</w> <w tag="Ncmsc" base="bhfeiceam">bhfeiceam</w>
+<w tag="Cs" base="mura">Muna</w> <w tag="Vmif1p" base="bí">mbeam</w> <w tag="Aqp" base="beo">beo</w> '<w tag="Td-p" base="an">na</w> <w tag="Ns-s" base="diaidh">dhiaidh</w> <w tag="Cs" base="ach">ach</w> <w tag="Ncfsc" base="seachtain">seachtain</w>
+<w tag="Npfsc" base="Gráinne">Gráinne</w> <w tag="Aq-fsc" base="maol">Mhaol</w> <w tag="Cc" base="agus">agus</w> <w tag="Mc" base="míle">míle</w> <w tag="Ncmsc" base="gaiscíoch">gaiscíoch</w>
+<w tag="Sp" base="ag">Ag</w> <w tag="Ncfsc" base="fógairt">fógairt</w> <w tag="Ncmsg" base="fán">fáin</w> <w tag="Sp" base="ar">ar</w> <w tag="Ncmpd" base="Gall">Ghallaibh</w>
+
+[<w tag="Ncmsc" base="curfá">Curfá</w>]
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="I" base="oró">Óró</w>, <w tag="Pp3mss" base="sé">sé</w> <w tag="Sp" base="do">do</w> <w tag="Ncfsg" base="beatha">bheatha</w> '<w tag="Ncmsg" base="baile">bhaile</w>
+<w tag="R" base="anois">Anois</w> <w tag="Sp" base="ar">ar</w> <w tag="Nv" base="teacht">theacht</w> <w tag="Td-sg" base="an">an</w> <w tag="Ncmsg" base="samhradh">tsamhraidh</w>

@@ -1,36 +1,40 @@
+import io
 import pathlib
-import sys
+import regex as re
+import time
 
 import requests
 import json
 
 from pathlib import Path
 
-### TOOLS
-FILETYPE = "*.txt"
 
-### API
+### CONFIG
 API_DELAY = 1.0 # How long do we wait between each query? Allows us to respect API limits.
+DEBUG_INFO = True
+FILETYPE = "*.txt"
+REGEX_PATTERN = re.compile(r"\p{L}+") # The pattern does not yet take into account changes with ' before vowels.
 
 ### Effects for the terminal
-ENDC = '\033[0m'
-BOLD = '\033[1m'
-DIM = '\033[2m'
-FAIL = '\033[91m'
-WARNING = '\033[93m'
-SUCCESS = '\033[92m'
-UP = '\033[1A'
+ENDC = "\033[0m"
+BOLD = "\033[1m"
+DIM = "\033[2m"
+FAIL = "\033[91m"
+WARNING = "\033[93m"
+SUCCESS = "\033[92m"
+UP = "\033[1A"
 
 ### Formatting presets
-BULLET = '·'
-INDENT = '  '
-STEP = '████▌'
-CHECKMARK = f'{SUCCESS}{BOLD}✓{ENDC}'
-ERR_SIGN = f'{FAIL}{BOLD}✕{ENDC}'
+BULLET = "·"
+INDENT = "  "
+STEP = "████▌"
+CHECKMARK = f"{SUCCESS}{BOLD}✓{ENDC}"
+ERR_SIGN = f"{FAIL}{BOLD}✕{ENDC}"
+WARN_SIGN = f"{WARNING}{BOLD}▲{ENDC}"
 
 
 class Tools:
-    USR_INPUT_PREFIX = f'{DIM}>{ENDC}'
+    USR_INPUT_PREFIX = f"{DIM}>{ENDC}"
 
     @staticmethod
     def list_files(directory = Path.cwd(), file_suffix = FILETYPE) -> list:
@@ -62,16 +66,70 @@ class Tools:
     def continue_prompt() -> bool:
         """Prompts user to continue or stop."""
         prompt_text = f"Continue? [{BOLD}Y{ENDC}/{BOLD}N{ENDC}] \n{Tools.USR_INPUT_PREFIX}"
-        if input(prompt_text).strip().lower() == 'y':
+        if input(prompt_text).strip().lower() == "y":
             return True
         else:
             return False
 
 
     @staticmethod
-    def analyse_file() -> list:
+    def analyse_file(file:io.TextIOWrapper, filename="test.txt") -> dict:
+        """Takes in an opened file and returns a dictionary containing:
+        · nb_lines : int
+        · nb_words : int
+        · nb_unique_words : int
+        · unique_words {
+            "word" : "word"
+        }
+        """
+        file_read = file.read()
+        file_data = {
+            "file_name": filename,
+            "file_text": file_read,
+            "nb_lines": 0,
+            "nb_words": 0,
+            "nb_unique_words": 0,
+            "unique_words": {},
+        }
+        if DEBUG_INFO:
+            print(f"==== analyse_file: file_data: \n{file_data}")
 
-        return [0, 0]
+        for line in file_read.splitlines():
+            file_data["nb_lines"] += 1
+            for word in re.findall(REGEX_PATTERN, line):
+                file_data["nb_words"] += 1
+                if word in file_data["unique_words"]:
+                    pass
+                elif word not in file_data["unique_words"]:
+                    file_data["unique_words"][word] = [word]
+                    file_data["nb_unique_words"] += 1
+
+        return file_data
+
+
+    @staticmethod
+    def insert_data_in_text(file_data: dict) -> str:
+        """Uses file_data to tag adequate words in the provided text."""
+        base_text:str = file_data["file_text"]
+        temp_text = []
+
+        # This lambda replaces words present in the database while avoiding duplicates.
+        replace = lambda w: f"<w tag=\"{file_data["unique_words"][w.group()][2]}\" base=\"{file_data["unique_words"][w.group()][1]}\">{w.group()}</w>"
+
+        for line in base_text.splitlines():
+            if DEBUG_INFO:
+                print(f"==== insert_data_in_text: line: {line}")
+            updated_line = re.sub(REGEX_PATTERN, replace, line)
+            if DEBUG_INFO:
+                print(f"==== insert_data_in_text: updated_line: {updated_line}")
+            temp_text.append(updated_line)
+
+        if DEBUG_INFO:
+            print(f"==== insert_data_in_text: temp_text: {temp_text}")
+        updated_text = "\n".join(temp_text)
+        if DEBUG_INFO:
+            print(f"==== insert_data_in_text: updated_text: {updated_text}")
+        return updated_text
 
 
     @staticmethod
@@ -84,8 +142,10 @@ class Tools:
             lemma, tags = DataCache.word_cache[word]
         else:
             word_data = Tools.api_request_corpas_ie(word)
-            lemma = word_data[lemma]
-            tags = word_data[tags]
+            if DEBUG_INFO:
+                print(f"==== get_info_for_word word_data: {word_data}")
+            lemma = word_data["lemma"]
+            tags = word_data["tags"]
             DataCache.word_cache[word] = [lemma, tags]
         return [word, lemma, tags]
 
@@ -97,23 +157,26 @@ class Tools:
             f"https://www.corpas.ie/noskeproxy.json?command=view&corpname=cng&viewmode=sen&q[]=q[lc=\"{word}\"]"
             + " within <doc/>&pagesize=1&fromp=1&attrs=word,tag,lemma"
         )
-        print(r)
-        print(r.text)
-        print("\n" * 4)
-        print(json.dumps(r.json(), indent=4))
+        #print(r)
+        #print(r.text)
+        #print("\n" * 4)
+        #print(json.dumps(r.json(), indent=4))
 
         r_json = json.loads(r.text)
         relevant_data = r_json["Lines"][0]["Kwic"][1]
-        print(relevant_data)
+        if DEBUG_INFO:
+            print(relevant_data)
         split_data = relevant_data["str"].split("/")
-        print(split_data)
+        if DEBUG_INFO:
+            print(split_data)
         word_data = {
             "word": word,
             "lemma": split_data[2],
-            "tag": split_data[1],
+            "tags": split_data[1],
         }
-        print(word_data)
-
+        if DEBUG_INFO:
+            print(f"==== api_request returned word_data: {word_data}")
+        time.sleep(1)
         return word_data
 # https://api.sketchengine.eu/bonito/run.cgi/view?corpname=preloaded/bnc2&json={"corpname":"preloaded/bnc2", "q":["q[lemma=\"test\"]", "r250"]}
 # https://api.sketchengine.eu/bonito/run.cgi/wordlist?corpname=preloaded/bnc2&wlattr=word&keywords=1&usesubcorp=wri-to-be-spoken&wlsort=frq&wlmaxitems=2&ref_corpname=preloaded/bnc&format=json
@@ -124,6 +187,7 @@ class Tools:
 
 
 class DataCache:
+    """Holds cached data and caches new data."""
     word_cache = {}
 
     @staticmethod
@@ -194,7 +258,8 @@ class ProgramLoop:
             output_directory = Tools.select_directory()
             files_in_dir = Tools.list_files(output_directory)
             if len(files_in_dir) > 0:
-                print(f"{ERR_SIGN}{FAIL} Warning: output directory already contains files.{ENDC}")
+                print(f"{WARN_SIGN}{WARNING} Warning: output directory already contains files.{ENDC}")
+                break
             elif len(files_in_dir) == 0:
                 print(f"{CHECKMARK} Directory is empty.{ENDC}")
                 break
@@ -211,28 +276,35 @@ class ProgramLoop:
     @staticmethod
     def step_process_loop():
         print(f"{BOLD}{STEP}3. Processing{ENDC}")
-        nb_lines = 10
-        nb_words = 10
         for file in ProgramLoop.selected_input_dir.glob(pattern = FILETYPE):
             current_file = file.name
             print(f"{BULLET} File: {current_file}")
             print(f"{INDENT}{DIM}├analysing file..{ENDC}")
-            file_info = Tools.analyse_file(file)
-            print(f"{UP}{INDENT}{DIM}├lines: {nb_lines:<4} words: {nb_words:<6}{ENDC}")
-            #break
+
+            with open(file, "r", encoding="utf-8") as opened_file:
+                #file_text = opened_file.read()
+                #print(file_text)
+                file_data = Tools.analyse_file(opened_file, current_file)
+                nb_lines = file_data["nb_lines"]
+                nb_words = file_data["nb_words"]
+                nb_unique_words = file_data["nb_unique_words"]
+                print(f"{INDENT}{DIM}├lines: {nb_lines:<4} words: {nb_words:<4} unique words: {nb_unique_words:<4}{ENDC}")
+
+                for word in file_data["unique_words"]:
+                    file_data["unique_words"][word] = Tools.get_info_for_word(word)
+
+            tagged_text = Tools.insert_data_in_text(file_data)
+            print(f"!!! final output: {tagged_text}")
+            output_file = Path(ProgramLoop.selected_output_dir).joinpath(current_file).resolve()
+            with open(output_file, "w", encoding="utf-8") as write_file:
+                write_file.write(tagged_text)
+            if DEBUG_INFO:
+                print(file_data)
 
 
 def main():
-    #Tools.api_request_corpas_ie("chéile")
-    #return
-    #while True:
-    DataCache.cache_word("test", "testlemma", "testcache")
-    print(DataCache.word_cache)
-    if "test" in DataCache.word_cache:
-        print("yes!")
-    else:
-        print("no!")
-    #    ProgramLoop.welcome()
+    while True:
+        ProgramLoop.welcome()
 
 
 # Press the green button in the gutter to run the script.
