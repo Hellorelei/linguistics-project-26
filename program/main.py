@@ -11,7 +11,7 @@ from pathlib import Path
 
 ### CONFIG
 API_DELAY = 1.0 # How long do we wait between each query? Allows us to respect API limits.
-DEBUG_INFO = True
+DEBUG_INFO = False
 FILETYPE = "*.txt"
 REGEX_PATTERN = re.compile(r"\p{L}+") # The pattern does not yet take into account changes with ' before vowels.
 
@@ -23,6 +23,7 @@ FAIL = "\033[91m"
 WARNING = "\033[93m"
 SUCCESS = "\033[92m"
 UP = "\033[1A"
+CLEARLINE = "\033[2K"
 
 ### Formatting presets
 BULLET = "·"
@@ -289,17 +290,24 @@ class ProgramLoop:
                 nb_words = file_data["nb_words"]
                 nb_unique_words = file_data["nb_unique_words"]
                 print(f"{INDENT}{DIM}├lines: {nb_lines:<4} words: {nb_words:<4} unique words: {nb_unique_words:<4}{ENDC}")
-
-                for word in file_data["unique_words"]:
+                print(f"{INDENT}{DIM}├gathering info for word: {ENDC}")
+                for idx, word in enumerate(file_data["unique_words"]):
+                    print(f"{UP}{CLEARLINE}{INDENT}{DIM}├gathering info for word {idx+1}/{nb_unique_words}: {word}{ENDC}")
                     file_data["unique_words"][word] = Tools.get_info_for_word(word)
 
+            print(f"{INDENT}{DIM}├✓ word identification complete.{ENDC}")
+            print(f"{INDENT}{DIM}├tagging text.. {ENDC}")
             tagged_text = Tools.insert_data_in_text(file_data)
-            print(f"!!! final output: {tagged_text}")
+            print(f"{INDENT}{DIM}├✓ tagging complete{ENDC}")
+            if DEBUG_INFO:
+                print(f"!!! final output: {tagged_text}")
             output_file = Path(ProgramLoop.selected_output_dir).joinpath(current_file).resolve()
             with open(output_file, "w", encoding="utf-8") as write_file:
+                print(f"{INDENT}{DIM}├writing to file.. {ENDC}")
                 write_file.write(tagged_text)
             if DEBUG_INFO:
                 print(file_data)
+            print(f"{INDENT}{DIM}└{ENDC}{CHECKMARK} done {ENDC}")
 
 
 def main():
