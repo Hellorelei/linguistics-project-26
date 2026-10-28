@@ -6,6 +6,9 @@ import json
 
 from pathlib import Path
 
+### TOOLS
+FILETYPE = "*.txt"
+
 ### API
 API_DELAY = 1.0 # How long do we wait between each query? Allows us to respect API limits.
 
@@ -16,6 +19,7 @@ DIM = '\033[2m'
 FAIL = '\033[91m'
 WARNING = '\033[93m'
 SUCCESS = '\033[92m'
+UP = '\033[1A'
 
 ### Formatting presets
 BULLET = '·'
@@ -29,7 +33,8 @@ class Tools:
     USR_INPUT_PREFIX = f'{DIM}>{ENDC}'
 
     @staticmethod
-    def list_files(directory = Path.cwd(), file_suffix = "*.txt") -> list:
+    def list_files(directory = Path.cwd(), file_suffix = FILETYPE) -> list:
+        """List files of given type in directory."""
         files_in_dir = []
         globbed_files_in_dir = directory.glob(pattern = file_suffix)
         for file in globbed_files_in_dir:
@@ -38,6 +43,7 @@ class Tools:
 
     @staticmethod
     def select_directory() -> pathlib.Path:
+        """Prompts user for a directory."""
         selected_dir = pathlib.Path().cwd()
         prompt_text = f"Please enter a directory: \n{Tools.USR_INPUT_PREFIX}"
         dir_error = f"{ERR_SIGN} {FAIL}Directory not found or not valid.{ENDC}"
@@ -54,22 +60,39 @@ class Tools:
 
     @staticmethod
     def continue_prompt() -> bool:
+        """Prompts user to continue or stop."""
         prompt_text = f"Continue? [{BOLD}Y{ENDC}/{BOLD}N{ENDC}] \n{Tools.USR_INPUT_PREFIX}"
         if input(prompt_text).strip().lower() == 'y':
             return True
         else:
             return False
 
+
+    @staticmethod
+    def analyse_file() -> list:
+
+        return [0, 0]
+
+
     @staticmethod
     def get_info_for_word(word):
+        """Return a list containing [word, lemma, tags] for the provided word.
+        Checks if word is present in cache; if yes, return that; if not, fetch it from API."""
         lemma = ""
         tags = ""
+        if word in DataCache.word_cache:
+            lemma, tags = DataCache.word_cache[word]
+        else:
+            word_data = Tools.api_request_corpas_ie(word)
+            lemma = word_data[lemma]
+            tags = word_data[tags]
+            DataCache.word_cache[word] = [lemma, tags]
         return [word, lemma, tags]
 
 
     @staticmethod
     def api_request_corpas_ie(word) -> dict:
-
+        """Requests data from corpas.ie for the given word; returns [word, lemma, tags]"""
         r = requests.get(
             f"https://www.corpas.ie/noskeproxy.json?command=view&corpname=cng&viewmode=sen&q[]=q[lc=\"{word}\"]"
             + " within <doc/>&pagesize=1&fromp=1&attrs=word,tag,lemma"
@@ -99,6 +122,23 @@ class Tools:
 # https://www.corpas.ie/noskeproxy.json?command=view&corpname=cng&viewmode=sen&q%5B%5D=q%5Blc%3D%22bhean%22%7Clemma_lc%3D%22bhean%22%5D%20within%20%3Cdoc%2F%3E&q%5B%5D=e200&kwicleftctx=-25&kwicrightctx=25&pagesize=40&fromp=1&attrs=word%2Clemma%2Ctag&ctxattrs=word%2Clemma%2Ctag&structs=g&refs=doc.file%2Cdoc.year%2Cdoc.medium%2Cdoc.textType%2Cdoc.genre%2Cdoc.topic%2Cdoc.author%2Cdoc.title%2Cdoc.url%2Cdoc.source%2Cdoc.publisher
 # https://www.corpas.ie/noskeproxy.json?command=view&corpname=cng&viewmode=sen&q%5B%5D=q%5Blc%3D%22bhean%22%7Clemma_lc%3D%22bhean%22%5D%20%5B%5D%7B0%2C2%7D%20%5Blc%3D%22ba%22%7Clemma_lc%3D%22ba%22%5D%20%5B%5D%7B0%2C2%7D%20%5Blc%3D%22léanmhar%22%7Clemma_lc%3D%22léanmhar%22%5D%20within%20%3Cdoc%2F%3E&q%5B%5D=e200&kwicleftctx=-25&kwicrightctx=25&pagesize=40&fromp=1&attrs=word%2Clemma%2Ctag&ctxattrs=word%2Clemma%2Ctag&structs=g&refs=doc.file%2Cdoc.year%2Cdoc.medium%2Cdoc.textType%2Cdoc.genre%2Cdoc.topic%2Cdoc.author%2Cdoc.title%2Cdoc.url%2Cdoc.source%2Cdoc.publisher
 
+
+class DataCache:
+    word_cache = {}
+
+    @staticmethod
+    def reset_cache():
+        """Empties word cache."""
+        word_cache = {}
+        print(f"{CHECKMARK} Cache reset.{ENDC}")
+
+    @staticmethod
+    def cache_word(word: str, lemma: str, tags: str):
+        """Create an entry for word containing [lemma, tags]."""
+        if word not in DataCache.word_cache:
+            DataCache.word_cache[word] = [lemma, tags]
+
+
 class ProgramLoop:
     selected_input_dir = pathlib.Path().cwd()
     selected_output_dir = pathlib.Path().cwd()
@@ -120,11 +160,12 @@ class ProgramLoop:
         print(f"{DIM}│{INDENT}4. The information is embedded into the text file.{ENDC}")
         print(f"{DIM}└{BOLD}Output{ENDC}{DIM}: the text files with embedded data are saved to a user-selected directory.{ENDC}")
         print(f"\n{DIM}To quit the program, press CTRL+C.{ENDC}\n")
-        ProgramLoop.step_input()
+        ProgramLoop.step_set_input()
 
 
     @staticmethod
-    def step_input():
+    def step_set_input():
+        """Prompts user for input directory."""
         print(f"{BOLD}{STEP}1. Selecting source{ENDC}")
         while True:
             input_directory = Tools.select_directory()
@@ -142,11 +183,12 @@ class ProgramLoop:
                 ProgramLoop.selected_input_dir = input_directory
                 ProgramLoop.files_in_input_dir = files_in_dir
                 break
-        ProgramLoop.step_output()
+        ProgramLoop.step_set_output()
 
 
     @staticmethod
-    def step_output():
+    def step_set_output():
+        """Prompts user for output directory."""
         print(f"{BOLD}{STEP}2. Selecting output{ENDC}")
         while True:
             output_directory = Tools.select_directory()
@@ -163,19 +205,34 @@ class ProgramLoop:
             if Tools.continue_prompt():
                 ProgramLoop.selected_output_dir = output_directory
                 break
+        ProgramLoop.step_process_loop()
 
 
     @staticmethod
-    def step_process():
+    def step_process_loop():
         print(f"{BOLD}{STEP}3. Processing{ENDC}")
-        print(f"i")
+        nb_lines = 10
+        nb_words = 10
+        for file in ProgramLoop.selected_input_dir.glob(pattern = FILETYPE):
+            current_file = file.name
+            print(f"{BULLET} File: {current_file}")
+            print(f"{INDENT}{DIM}├analysing file..{ENDC}")
+            file_info = Tools.analyse_file(file)
+            print(f"{UP}{INDENT}{DIM}├lines: {nb_lines:<4} words: {nb_words:<6}{ENDC}")
+            #break
 
 
 def main():
-    Tools.api_request_corpas_ie("chéile")
-    return
-    while True:
-        ProgramLoop.welcome()
+    #Tools.api_request_corpas_ie("chéile")
+    #return
+    #while True:
+    DataCache.cache_word("test", "testlemma", "testcache")
+    print(DataCache.word_cache)
+    if "test" in DataCache.word_cache:
+        print("yes!")
+    else:
+        print("no!")
+    #    ProgramLoop.welcome()
 
 
 # Press the green button in the gutter to run the script.
