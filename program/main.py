@@ -53,7 +53,7 @@ class Tools:
         prompt_text = f"Please enter a directory: \n{Tools.USR_INPUT_PREFIX}"
         dir_error = f"{ERR_SIGN} {FAIL}Directory not found or not valid.{ENDC}"
         while True:
-            selected_dir_str = input(prompt_text).replace('\'', '')
+            selected_dir_str = input(prompt_text).replace('\\', '').replace('\'', '').strip()
             selected_dir = Path(selected_dir_str)
             selected_dir = selected_dir.resolve()
             print(f"{DIM}{BULLET} Computed directory: {selected_dir}{ENDC}")
@@ -227,7 +227,8 @@ class ProgramLoop:
         print(f"{BOLD}{STEP}1. Selecting source{ENDC}")
         while True:
             input_directory = Tools.select_directory()
-            print(input_directory)
+            if DEBUG_INFO:
+                print(input_directory)
             files_in_dir = Tools.list_files(input_directory)
             print(files_in_dir)
             if len(files_in_dir) > 0:
