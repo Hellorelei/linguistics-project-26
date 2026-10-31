@@ -158,13 +158,12 @@ class Tools:
             f"https://www.corpas.ie/noskeproxy.json?command=view&corpname=cng&viewmode=sen&q[]=q[lc=\"{word}\"]"
             + " within <doc/>&pagesize=1&fromp=1&attrs=word,tag,lemma"
         )
-        #print(r)
-        #print(r.text)
-        #print("\n" * 4)
-        #print(json.dumps(r.json(), indent=4))
 
         r_json = json.loads(r.text)
-        relevant_data = r_json["Lines"][0]["Kwic"][1]
+        try: relevant_data = r_json["Lines"][0]["Kwic"][1]
+        except IndexError:
+            word_data = {"word": word, "lemma": "IndexERROR", "tags": "IndexERROR", }
+            return word_data
         if DEBUG_INFO:
             print(relevant_data)
         split_data = relevant_data["str"].split("/")
@@ -179,12 +178,6 @@ class Tools:
             print(f"==== api_request returned word_data: {word_data}")
         time.sleep(1)
         return word_data
-# https://api.sketchengine.eu/bonito/run.cgi/view?corpname=preloaded/bnc2&json={"corpname":"preloaded/bnc2", "q":["q[lemma=\"test\"]", "r250"]}
-# https://api.sketchengine.eu/bonito/run.cgi/wordlist?corpname=preloaded/bnc2&wlattr=word&keywords=1&usesubcorp=wri-to-be-spoken&wlsort=frq&wlmaxitems=2&ref_corpname=preloaded/bnc&format=json
-# https://www.corpas.ie/en/cng/?q=bhean%20ba%20léanmhar
-# https://api.sketchengine.eu/bonito/run.cgi/wsketch?corpname=XXX&lemma=test&lpos=-n
-# https://www.corpas.ie/noskeproxy.json?command=view&corpname=cng&viewmode=sen&q%5B%5D=q%5Blc%3D%22bhean%22%7Clemma_lc%3D%22bhean%22%5D%20within%20%3Cdoc%2F%3E&q%5B%5D=e200&kwicleftctx=-25&kwicrightctx=25&pagesize=40&fromp=1&attrs=word%2Clemma%2Ctag&ctxattrs=word%2Clemma%2Ctag&structs=g&refs=doc.file%2Cdoc.year%2Cdoc.medium%2Cdoc.textType%2Cdoc.genre%2Cdoc.topic%2Cdoc.author%2Cdoc.title%2Cdoc.url%2Cdoc.source%2Cdoc.publisher
-# https://www.corpas.ie/noskeproxy.json?command=view&corpname=cng&viewmode=sen&q%5B%5D=q%5Blc%3D%22bhean%22%7Clemma_lc%3D%22bhean%22%5D%20%5B%5D%7B0%2C2%7D%20%5Blc%3D%22ba%22%7Clemma_lc%3D%22ba%22%5D%20%5B%5D%7B0%2C2%7D%20%5Blc%3D%22léanmhar%22%7Clemma_lc%3D%22léanmhar%22%5D%20within%20%3Cdoc%2F%3E&q%5B%5D=e200&kwicleftctx=-25&kwicrightctx=25&pagesize=40&fromp=1&attrs=word%2Clemma%2Ctag&ctxattrs=word%2Clemma%2Ctag&structs=g&refs=doc.file%2Cdoc.year%2Cdoc.medium%2Cdoc.textType%2Cdoc.genre%2Cdoc.topic%2Cdoc.author%2Cdoc.title%2Cdoc.url%2Cdoc.source%2Cdoc.publisher
 
 
 class DataCache:
@@ -283,8 +276,6 @@ class ProgramLoop:
             print(f"{INDENT}{DIM}├analysing file..{ENDC}")
 
             with open(file, "r", encoding="utf-8") as opened_file:
-                #file_text = opened_file.read()
-                #print(file_text)
                 file_data = Tools.analyse_file(opened_file, current_file)
                 nb_lines = file_data["nb_lines"]
                 nb_words = file_data["nb_words"]

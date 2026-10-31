@@ -1,0 +1,1 @@
+<w tag="IndexERROR" base="IndexERROR">ƿ</w> <w tag="IndexERROR" base="IndexERROR">ƺ</w> <w tag="IndexERROR" base="IndexERROR">ȝ</w> <w tag="Sp" base="ó">ó</w> <w tag="Ncmsc" base="Ò">ò</w> '<w tag="Q" base="a">a</w> '<w tag="Q" base="a">a</w>' '<w tag="Xf" base="test">test</w>'

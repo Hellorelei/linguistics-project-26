@@ -1,0 +1,1 @@
+<<w tag="Y" base="TAG">tag</w>></<w tag="Y" base="TAG">tag</w>> <<w tag="Y" base="W">w</w>=<w tag="Ncfsc" base="abcd">abcd</w>/> # <w tag="Xf" base="Linguistics">linguistics</w>-<w tag="Xf" base="project">project</w>-26

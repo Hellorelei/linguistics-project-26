@@ -1,0 +1,25 @@
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Sp" base="d">d</w>’<w tag="Vmis" base="imigh">imigh</w> <w tag="U" base="go">go</w> <w tag="Ncmpc" base="gabhal">Gabhla</w>,
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Wp-i" base="is">is</w> <w tag="Npmsc" base="Feilimí">Feilimí</w> <w tag="Pr3ms" base="i">ann</w>.
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Sp" base="d">d</w>’<w tag="Vmis" base="imigh">imigh</w> <w tag="U" base="go">go</w> <w tag="Ncmpc" base="gabhal">Gabhla</w>,
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Wp-i" base="is">is</w> <w tag="Npmsc" base="Feilimí">Feilimí</w> <w tag="Pr3ms" base="i">ann</w>.
+
+<w tag="Ncmsc" base="curfá">Curfá</w>
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Aq-msc" base="bídeach">bídeach</w>, <w tag="Ncmsc" base="báidín">báidín</w> <w tag="Aq-msc" base="Beosach">beosach</w>,
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Aq-msc" base="Bóidheach">bóidheach</w>, <w tag="Ncmsc" base="báidín">báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w>.
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Aqp" base="díreach">díreach</w>, <w tag="Ncmsc" base="báidín">báidín</w> <w tag="Aqp" base="deonach">deontach</w>,
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Wp-i" base="is">is</w> <w tag="Npmsc" base="Feilimí">Feilimí</w> <w tag="Pr3ms" base="i">ann</w>.
+
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Sp" base="d">d</w>’<w tag="Vmis" base="imigh">imigh</w> <w tag="U" base="go">go</w> <w tag="Npmsg" base="toraí">Toraí</w>,
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Wp-i" base="is">is</w> <w tag="Npmsc" base="Feilimí">Feilimí</w> <w tag="Pr3ms" base="i">ann</w>.
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Sp" base="d">d</w>’<w tag="Vmis" base="imigh">imigh</w> <w tag="U" base="go">go</w> <w tag="Npmsg" base="toraí">Toraí</w>,
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Wp-i" base="is">is</w> <w tag="Npmsc" base="Feilimí">Feilimí</w> <w tag="Pr3ms" base="i">ann</w>.
+
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Ncmsc" base="briseadh">briseadh</w> <w tag="Sp" base="i">i</w> <w tag="Npmsc" base="Tóraí">dToraí</w>,
+<w tag="IndexERROR" base="IndexERROR">Báidin</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Wp-i" base="is">is</w> <w tag="Npmsc" base="Feilimí">Feilimí</w> <w tag="Pr3ms" base="i">ann</w>.
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Ncmsc" base="briseadh">briseadh</w> <w tag="Sp" base="i">i</w> <w tag="Npmsc" base="Tóraí">dToraí</w>,
+<w tag="IndexERROR" base="IndexERROR">Báidin</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Wp-i" base="is">is</w> <w tag="Npmsc" base="Feilimí">Feilimí</w> <w tag="Pr3ms" base="i">ann</w>.
+
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Ncmsc" base="briseadh">briseadh</w> <w tag="Sp" base="i">i</w> <w tag="Npmsc" base="Tóraí">dToraí</w>,
+<w tag="Ncmsc" base="iasc">Iasc</w> <w tag="Sp" base="ar">ar</w> <w tag="Ncmsc" base="bord">bhord</w> <w tag="Cc" base="agus">agus</w> <w tag="Npmsc" base="Feilimí">Feilimí</w> <w tag="Pr3ms" base="i">ann</w>.
+<w tag="Ncmsc" base="báidín">Báidín</w> <w tag="Npmsc" base="Feilimí">Fheilimí</w> <w tag="Ncmsc" base="briseadh">briseadh</w> <w tag="Sp" base="i">i</w> <w tag="Npmsc" base="Tóraí">dToraí</w>,
+<w tag="Ncmsc" base="iasc">Iasc</w> <w tag="Sp" base="ar">ar</w> <w tag="Ncmsc" base="bord">bhord</w> <w tag="Cc" base="agus">agus</w> <w tag="Npmsc" base="Feilimí">Feilimí</w> <w tag="Pr3ms" base="i">ann</w>.
